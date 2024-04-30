@@ -421,6 +421,7 @@ dtb-$(CONFIG_SOC_IMX6ULL) += \
 	imx6ull-14x14-evk-usb-certi.dtb \
 	imx6ull-alientek-emmc.dtb \
 	imx6ull-alientek-nand.dtb \
+	imx6ull-atk-mini-emmc.dtb \
 	imx6ull-9x9-evk.dtb \
 	imx6ull-9x9-evk-btwifi.dtb \
 	imx6ull-9x9-evk-ldo.dtb
