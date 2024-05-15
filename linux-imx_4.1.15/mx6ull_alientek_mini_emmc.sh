@@ -1,8 +1,8 @@
-#!/bin/sh
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- imx_atk_mini_emmc_defconfig
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- all -j16
+#!/bin/bash
+bear -- make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
+bear -- make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- imx_atk_mini_emmc_defconfig
+bear -- make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+bear -- make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- all -j16
 
 rm ~/OSD_share/image/zImage
 cp arch/arm/boot/zImage ~/OSD_share/image
