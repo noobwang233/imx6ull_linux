@@ -183,6 +183,7 @@
 	gpioled {
 		#address-cells = <1>;
 		#size-cells = <1>;
+		num = <0>;
 		compatible = "my_led";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_led>;
