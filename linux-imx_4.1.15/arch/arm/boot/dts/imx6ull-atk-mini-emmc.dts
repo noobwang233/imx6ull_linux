@@ -335,6 +335,10 @@
 		compatible = "wt,at24c02";
 		reg = <0x50>;
 	};
+	oled_sh1106@3C {
+		compatible = "wt,oled_sh1106";
+		reg = <0x3C>;
+	};
 };
 
 &i2c2 {
