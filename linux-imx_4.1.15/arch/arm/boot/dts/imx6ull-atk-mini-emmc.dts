@@ -250,15 +250,15 @@
 	assigned-clock-rates = <786432000>;
 };
 
-&csi {
-	status = "okay";
+// &csi {
+// 	status = "okay";
 
-	port {
-		csi1_ep: endpoint {
-			remote-endpoint = <&ov5640_ep>;
-		};
-	};
-};
+// 	port {
+// 		csi1_ep: endpoint {
+// 			remote-endpoint = <&ov5640_ep>;
+// 		};
+// 	};
+// };
 
 &fec1 {
 	pinctrl-names = "default";
@@ -358,25 +358,25 @@
 		wlf,shared-lrclk;
 	};
 
-	ov5640: ov5640@3c {
-		compatible = "ovti,ov5640";
-		reg = <0x3c>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_csi1>;
-		clocks = <&clks IMX6UL_CLK_CSI>;
-		clock-names = "csi_mclk";
-		pwn-gpios = <&gpio_spi 6 1>;
-		rst-gpios = <&gpio_spi 5 0>;
-		csi_id = <0>;
-		mclk = <24000000>;
-		mclk_source = <0>;
-		status = "okay";
-		port {
-			ov5640_ep: endpoint {
-				remote-endpoint = <&csi1_ep>;
-			};
-		};
-	};
+	// ov5640: ov5640@3c {
+	// 	compatible = "ovti,ov5640";
+	// 	reg = <0x3c>;
+	// 	pinctrl-names = "default";
+	// 	pinctrl-0 = <&pinctrl_csi1>;
+	// 	clocks = <&clks IMX6UL_CLK_CSI>;
+	// 	clock-names = "csi_mclk";
+	// 	pwn-gpios = <&gpio_spi 6 1>;
+	// 	rst-gpios = <&gpio_spi 5 0>;
+	// 	csi_id = <0>;
+	// 	mclk = <24000000>;
+	// 	mclk_source = <0>;
+	// 	status = "okay";
+	// 	port {
+	// 		ov5640_ep: endpoint {
+	// 			remote-endpoint = <&csi1_ep>;
+	// 		};
+	// 	};
+	// };
 
 	// /* zuozhongkai FT5406/FT5426 */
 	// ft5426: ft5426@38 {
@@ -404,18 +404,18 @@
 	// 	interrupt-gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
 	// 	status = "okay";  /* 如果需要改为okay */
 	// };
-	gt9147:gt9147@14 {
-		compatible = "wt,touch";
-		reg = <0x14>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_tsc
-					 &pinctrl_tsc_reset >;
-		interrupt-parent = <&gpio1>;
-		interrupts = <9 IRQ_TYPE_NONE>;
-		reset-gpios  = <&gpio5 9 GPIO_ACTIVE_LOW>;
-		interrupt-gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
-		status = "okay";  /* 如果需要改为okay */
-	};
+	// gt9147:gt9147@14 {
+	// 	compatible = "wt,touch";
+	// 	reg = <0x14>;
+	// 	pinctrl-names = "default";
+	// 	pinctrl-0 = <&pinctrl_tsc
+	// 				 &pinctrl_tsc_reset >;
+	// 	interrupt-parent = <&gpio1>;
+	// 	interrupts = <9 IRQ_TYPE_NONE>;
+	// 	reset-gpios  = <&gpio5 9 GPIO_ACTIVE_LOW>;
+	// 	interrupt-gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
+	// 	status = "okay";  /* 如果需要改为okay */
+	// };
 	/* zuozhongkai sill902x,如果需要HDMI就将status改为okay即可  */
 	/*
 	sii902x: sii902x@39 {
@@ -517,26 +517,34 @@
             >;
         };
 
-		/* zuozhongkai SII902X  INT*/
-        pinctrl_sii902x: hdmigrp-1 {
-            fsl,pins = <
-                MX6UL_PAD_GPIO1_IO09__GPIO1_IO09        0x11
-            >;
-        };
+		// /* zuozhongkai SII902X  INT*/
+        // pinctrl_sii902x: hdmigrp-1 {
+        //     fsl,pins = <
+        //         MX6UL_PAD_GPIO1_IO09__GPIO1_IO09        0x11
+        //     >;
+        // };
 
-		/* zuozhongkai PWM3 GPIO1_IO04 */
-		pinctrl_pwm3: pwm3grp {
+		pinctrl_st7735s: st7735s {  
 			fsl,pins = <
-				MX6UL_PAD_GPIO1_IO04__PWM3_OUT   0x110b0
+				MX6UL_PAD_GPIO1_IO01__GPIO1_IO01        0x10B0	/* 屏幕复位RES引脚 */
+				MX6UL_PAD_UART3_TX_DATA__GPIO1_IO24     0x10B0  /* 屏幕DC(data or command)引脚 */
+				MX6UL_PAD_UART3_RX_DATA__GPIO1_IO25     0x10B0	/* 屏幕BL背光引脚 */
 			>;
-		};
+		};  
 
-		/* zuozhongkai ADC1_CH1 GPIO1_IO01 */
-		pinctrl_adc1: adc1grp {
-			fsl,pins = <
-				MX6UL_PAD_GPIO1_IO01__GPIO1_IO01   0xb0
-			>;
-		};
+		// /* zuozhongkai PWM3 GPIO1_IO04 */
+		// pinctrl_pwm3: pwm3grp {
+		// 	fsl,pins = <
+		// 		MX6UL_PAD_GPIO1_IO04__PWM3_OUT   0x110b0
+		// 	>;
+		// };
+
+		// /* zuozhongkai ADC1_CH1 GPIO1_IO01 */
+		// pinctrl_adc1: adc1grp {
+		// 	fsl,pins = <
+		// 		MX6UL_PAD_GPIO1_IO01__GPIO1_IO01   0xb0
+		// 	>;
+		// };
 
 		pinctrl_csi1: csi1grp {
 			fsl,pins = <
@@ -584,10 +592,10 @@
 		};
 
 		pinctrl_flexcan1: flexcan1grp{
-			fsl,pins = <
-				MX6UL_PAD_UART3_RTS_B__FLEXCAN1_RX	0x1b020
-				MX6UL_PAD_UART3_CTS_B__FLEXCAN1_TX	0x1b020
-			>;
+		/* 	fsl,pins = <
+		// 		MX6UL_PAD_UART3_RTS_B__FLEXCAN1_RX	0x1b020
+		// 		MX6UL_PAD_UART3_CTS_B__FLEXCAN1_TX	0x1b020
+		// 	>; */
 		};
 
 		pinctrl_flexcan2: flexcan2grp{
@@ -693,14 +701,14 @@
 			>;
 		};
 
-		pinctrl_uart2: uart2grp {
-			fsl,pins = <
-				/* MX6UL_PAD_UART2_TX_DATA__UART2_DCE_TX	0x1b0b1 */
-				/* MX6UL_PAD_UART2_RX_DATA__UART2_DCE_RX	0x1b0b1 */
-				MX6UL_PAD_UART3_RX_DATA__UART2_DCE_RTS	0x1b0b1
-				MX6UL_PAD_UART3_TX_DATA__UART2_DCE_CTS	0x1b0b1
-			>;
-		};
+		// pinctrl_uart2: uart2grp {
+		// 	fsl,pins = <
+		// 		/* MX6UL_PAD_UART2_TX_DATA__UART2_DCE_TX	0x1b0b1 */
+		// 		/* MX6UL_PAD_UART2_RX_DATA__UART2_DCE_RX	0x1b0b1 */
+		// 		MX6UL_PAD_UART3_RX_DATA__UART2_DCE_RTS	0x1b0b1
+		// 		MX6UL_PAD_UART3_TX_DATA__UART2_DCE_CTS	0x1b0b1
+		// 	>;
+		// };
 
 		pinctrl_uart2dte: uart2dtegrp {
 			fsl,pins = <
@@ -711,13 +719,13 @@
 			>; 
 		};
 	
-		/* zuozhongkai */
-		pinctrl_uart3: uart3grp {
-			fsl,pins = <
-				MX6UL_PAD_UART3_TX_DATA__UART3_DCE_TX		0X1b0b1
-				MX6UL_PAD_UART3_RX_DATA__UART3_DCE_RX		0X1b0b1
-			>;
-		};
+		// /* zuozhongkai */
+		// pinctrl_uart3: uart3grp {
+		// 	fsl,pins = <
+		// 		MX6UL_PAD_UART3_TX_DATA__UART3_DCE_TX		0X1b0b1
+		// 		MX6UL_PAD_UART3_RX_DATA__UART3_DCE_RX		0X1b0b1
+		// 	>;
+		// };
 
 		pinctrl_usdhc1: usdhc1grp {
 			fsl,pins = <
@@ -892,7 +900,7 @@
 		     &pinctrl_lcdif_ctrl>;
 
 	display = <&display0>;
-	status = "okay";
+	status = "disable";
 
 	// /* 7寸1024*600 */
 	// display0: display {
@@ -980,23 +988,23 @@
 	status = "okay";
 };
 
-/* zuozhongkai PWM3 */
-&pwm3 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_pwm3>;
-	clocks = <&clks IMX6UL_CLK_PWM3>,
-			 <&clks IMX6UL_CLK_PWM3>;
-	status = "disable";
-};
+// /* zuozhongkai PWM3 */
+// &pwm3 {
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&pinctrl_pwm3>;
+// 	clocks = <&clks IMX6UL_CLK_PWM3>,
+// 			 <&clks IMX6UL_CLK_PWM3>;
+// 	status = "disable";
+// };
 
-/* zuozhongkai ADC1 */
-&adc1 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_adc1>;
-	num-channels = <2>;
-	vref-supply = <&reg_vref_adc>;
-	status = "okay";
-};
+// /* zuozhongkai ADC1 */
+// &adc1 {
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&pinctrl_adc1>;
+// 	num-channels = <2>;
+// 	vref-supply = <&reg_vref_adc>;
+// 	status = "okay";
+// };
 
 &pxp {
 	status = "okay";
@@ -1046,12 +1054,12 @@
 	status = "okay";
 };
 
-/* zuozhongkai */
-&uart3 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_uart3>;
-	status = "okay";
-};
+// /* zuozhongkai */
+// &uart3 {
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&pinctrl_uart3>;
+// 	status = "okay";
+// };
 
 &usbotg1 {
 	dr_mode = "otg";
@@ -1112,9 +1120,36 @@
 	pinctrl-0 = <&pinctrl_ecspi3>;
 	status = "okay";
 
-	spidev: icm20608@0 {
-		compatible = "alientek,icm20608";
-		spi-max-frequency = <8000000>;
-		reg = <0>;
-	};	
+	// spidev: icm20608@0 {
+	// 	compatible = "alientek,icm20608";
+	// 	spi-max-frequency = <8000000>;
+	// 	reg = <0>;
+	// };
+
+	lcd: st7735s@0 {
+		// pinctrl-names = "default";
+		// pinctrl-0 = <&pinctrl_st7735s>;
+		compatible = "wt,st7735s";
+		reg = <0>;									/* reg = <index>;  指定片选引脚，就是父节点的cs-gpio中第index个 */
+		spi-max-frequency = <16000000>;	  			/* 指定设备的最高速度 */
+		/* GPIO_ACTIVE_HIGH目的是指定有效电平, 使用gpiod_set_value()设置的是逻辑电平 */
+		dc-gpio = <&gpio1 24 GPIO_ACTIVE_HIGH>;		/* 数据/命令配置引脚 */
+		res-gpio = <&gpio1 1 GPIO_ACTIVE_HIGH>;		/* 复位引脚 */
+		bl-gpio = <&gpio1 25 GPIO_ACTIVE_HIGH>;		/* 背光引脚 */
+		height = <128>;
+		width  = <160>;
+		status = "okay";
+	};
+
+	// flash@0 {
+	// 	#address-cells = <1>;
+	// 	#size-cells = <1>;
+	// 	compatible = "mxicy,mx25l1606e", "winbond,w25q128";
+	// 	reg = <0>;
+	// 	spi-max-frequency = <40000000>;
+
+	// 	partition@00000000 {
+	// 		reg = <0x00000000 0x200000>;	/* 2Mb */
+	// 	};
+	// };
 };
