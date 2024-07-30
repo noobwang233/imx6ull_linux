@@ -153,33 +153,7 @@
             spi-max-frequency = <100000>;
         };
     };
-    
-    /* zuozhongkai dts leds linux自带led驱动的设备树*/
-    /*
-    dtsleds {
-        compatible = "gpio-leds";
- 
-        led0 {
-            label = "red";
-            gpios = <&gpio1 3 GPIO_ACTIVE_LOW>;
-            linux,default-trigger = "heartbeat";
-            default-state = "on";
-        };
-    };*/
 
-    /* zuozhongkai */
-    // /*
-    // alphaled {
-    //     #address-cells = <1>;
-    //     #size-cells = <1>;
-    //     compatible = "atkalpha-led";
-    //     status = "okay";
-    //     reg = < 0X020C406C 0X04        /* CCM_CCGR1_BAE             */
-    //             0X020E0068 0X04        /* SW_MUX_GPIO1_IO03_BASE     */
-    //             0X020E02F4 0X04        /* SW_PAD_GPIO1_IO03_BASE    */
-    //             0X0209C000 0X04        /* GPIO1_DR_BASE             */
-    //             0X0209C004 0X04>;    /* GPIO1_GDIR_BASE             */
-    // };*/
     gpioled {
         #address-cells = <1>;
         #size-cells = <1>;
@@ -214,20 +188,6 @@
         key_code = <KEY_ENTER>;
         status = "okay";
     };
-
-    /*
-    // /* zuozhongkai dts keys linux自带的key驱动设备树 */
-    // gpio-keys {
-    //     compatible = "gpio-keys";
-    //     #address-cells = <1>;
-    //     #size-cells = <0>;
-    //     autorepeat;
-    //     key0 {
-    //         label = "GPIO Key Enter";
-    //         linux,code = <KEY_ENTER>;
-    //         gpios = <&gpio1 18 GPIO_ACTIVE_LOW>;
-    //     };
-    // };*/
 
     /* zuozhongkai sii902x reset */
     sii902x_reset: sii902x-reset {
@@ -378,20 +338,6 @@
     //     };
     // };
 
-    // /* zuozhongkai FT5406/FT5426 */
-    // ft5426: ft5426@38 {
-    //     compatible = "edt,edt-ft5426","edt,edt-ft5406";
-    //     reg = <0x38>;
-    //     pinctrl-names = "default";
-    //     pinctrl-0 = <&pinctrl_tsc
-    //                 &pinctrl_tsc_reset >; 
-    //     interrupt-parent = <&gpio1>; 
-    //     interrupts = <9 0>; 
-    //     reset-gpios = <&gpio5 9 GPIO_ACTIVE_LOW>;  
-    //     interrupt-gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
-    //     status = "okay";
-    // };
-
     gt9147:gt9147@14 {
         compatible = "goodix,gt9147", "goodix,gt9xx";
         reg = <0x14>;
@@ -445,19 +391,6 @@
             ];
         status = "okay";  /* 如果需要改为okay */
     };
-
-    // gt9147:gt9147@14 {
-    //     compatible = "wt,touch";
-    //     reg = <0x14>;
-    //     pinctrl-names = "default";
-    //     pinctrl-0 = < &pinctrl_tsc 
-    //                   &pinctrl_lcdif_reset >;
-    //     interrupt-parent = <&gpio1>;
-    //     interrupts = <9 IRQ_TYPE_NONE>;
-    //     reset-gpio  = <&gpio5 9 GPIO_ACTIVE_LOW>;
-    //     interrupt-gpio = <&gpio1 9 GPIO_ACTIVE_LOW>;
-    //     status = "okay";  /* 如果需要改为okay */
-    // };
 
     /* zuozhongkai sill902x,如果需要HDMI就将status改为okay即可  */
     /*
@@ -560,34 +493,14 @@
             >;
         };
 
-        // /* zuozhongkai SII902X  INT*/
-        // pinctrl_sii902x: hdmigrp-1 {
-        //     fsl,pins = <
-        //         MX6UL_PAD_GPIO1_IO09__GPIO1_IO09        0x11
-        //     >;
-        // };
 
-        // pinctrl_st7735s: st7735s {  
-        //     fsl,pins = <
-        //         MX6UL_PAD_GPIO1_IO01__GPIO1_IO01        0x10B0    /* 屏幕复位RES引脚 */
-        //         MX6UL_PAD_UART3_TX_DATA__GPIO1_IO24     0x10B0  /* 屏幕DC(data or command)引脚 */
-        //         MX6UL_PAD_UART3_RX_DATA__GPIO1_IO25     0x10B0    /* 屏幕BL背光引脚 */
-        //     >;
-        // };  
-
-        // /* zuozhongkai PWM3 GPIO1_IO04 */
-        // pinctrl_pwm3: pwm3grp {
-        //     fsl,pins = <
-        //         MX6UL_PAD_GPIO1_IO04__PWM3_OUT   0x110b0
-        //     >;
-        // };
-
-        // /* zuozhongkai ADC1_CH1 GPIO1_IO01 */
-        // pinctrl_adc1: adc1grp {
-        //     fsl,pins = <
-        //         MX6UL_PAD_GPIO1_IO01__GPIO1_IO01   0xb0
-        //     >;
-        // };
+        pinctrl_st7735s: st7735s {  
+            fsl,pins = <
+                MX6UL_PAD_GPIO1_IO01__GPIO1_IO01        0x10B0    /* 屏幕复位RES引脚 */
+                MX6UL_PAD_UART3_TX_DATA__GPIO1_IO24     0x10B0  /* 屏幕DC(data or command)引脚 */
+                MX6UL_PAD_UART3_RX_DATA__GPIO1_IO25     0x10B0    /* 屏幕BL背光引脚 */
+            >;
+        };
 
         pinctrl_csi1: csi1grp {
             fsl,pins = <
@@ -1149,36 +1062,19 @@
     pinctrl-0 = <&pinctrl_ecspi3>;
     status = "okay";
 
-    // spidev: icm20608@0 {
-    //     compatible = "alientek,icm20608";
-    //     spi-max-frequency = <8000000>;
-    //     reg = <0>;
-    // };
 
-    // lcd: st7735s@0 {
-    //     // pinctrl-names = "default";
-    //     // pinctrl-0 = <&pinctrl_st7735s>;
-    //     compatible = "wt,st7735s";
-    //     reg = <0>;                                    /* reg = <index>;  指定片选引脚，就是父节点的cs-gpio中第index个 */
-    //     spi-max-frequency = <16000000>;                  /* 指定设备的最高速度 */
-    //     /* GPIO_ACTIVE_HIGH目的是指定有效电平, 使用gpiod_set_value()设置的是逻辑电平 */
-    //     dc-gpio = <&gpio1 24 GPIO_ACTIVE_HIGH>;        /* 数据/命令配置引脚 */
-    //     res-gpio = <&gpio1 1 GPIO_ACTIVE_HIGH>;        /* 复位引脚 */
-    //     bl-gpio = <&gpio1 25 GPIO_ACTIVE_HIGH>;        /* 背光引脚 */
-    //     height = <128>;
-    //     width  = <160>;
-    //     status = "okay";
-    // };
-
-    // flash@0 {
-    //     #address-cells = <1>;
-    //     #size-cells = <1>;
-    //     compatible = "mxicy,mx25l1606e", "winbond,w25q128";
-    //     reg = <0>;
-    //     spi-max-frequency = <40000000>;
-
-    //     partition@00000000 {
-    //         reg = <0x00000000 0x200000>;    /* 2Mb */
-    //     };
-    // };
+    lcd: st7735s@0 {
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_st7735s>;
+        compatible = "wt,st7735s";
+        reg = <0>;                                    /* reg = <index>;  指定片选引脚，就是父节点的cs-gpio中第index个 */
+        spi-max-frequency = <16000000>;                  /* 指定设备的最高速度 */
+        /* GPIO_ACTIVE_HIGH目的是指定有效电平, 使用gpiod_set_value()设置的是逻辑电平 */
+        dc-gpio = <&gpio1 24 GPIO_ACTIVE_HIGH>;        /* 数据/命令配置引脚 */
+        res-gpio = <&gpio1 1 GPIO_ACTIVE_HIGH>;        /* 复位引脚 */
+        bl-gpio = <&gpio1 25 GPIO_ACTIVE_HIGH>;        /* 背光引脚 */
+        height = <128>;
+        width  = <160>;
+        status = "okay";
+    };
 };
